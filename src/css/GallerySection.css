@@ -1,0 +1,16 @@
+.gallery-section {
+	width: 100%;
+	float: left;
+	text-align: left;
+	background: #474E97;
+	/*background: #36464E; /* Blue grey * / */
+	/*background: #029AE4; /* Blue * / */
+}
+
+
+.gallery-section h1 {
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 60px;
+}

@@ -1,0 +1,35 @@
+import React, { Component } from 'react';
+import { GridList, GridTile } from 'material-ui/GridList';
+
+import '../css/TeamSection.css';
+
+class TeamSection extends Component {
+
+	render() {
+
+		const styles = {
+		  root: {
+		    display: 'flex',
+		    flexWrap: 'wrap',
+		    justifyContent: 'space-around',
+		  }
+		}
+		
+		return (
+			<section className="team-section">
+				<h1> Equipe </h1>
+				<div>
+				<GridList 
+					rows={2}
+					cols={7}
+					padding={0}
+					cellHeight={250}>
+					{ /*this.renderTiles()*/ }
+				</GridList>
+				</div>
+			</section>
+		);
+	}
+}
+
+export default TeamSection;
