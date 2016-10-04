@@ -11,6 +11,8 @@ injectTapEventPlugin();
 
 import App from './App';
 import './index.css';
+
+import Auth from './components/Auth';
 import Home from './components/Home';
 import Team from './components/Team';
 import Gallery from './components/Gallery';
@@ -34,6 +36,7 @@ render(
     		<Route path="galeria" component={Gallery} />
     		<Route path="equipe" component={Team} />
     	</Route>
+      <Route path="/auth" component={Auth} />
     </Router>
   </Provider>,
   document.getElementById('root')
