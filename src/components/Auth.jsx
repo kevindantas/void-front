@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as AuthActions from '../actions/authActions';
+
 
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
@@ -20,25 +23,40 @@ export default class Auth extends Component {
 	 * @return {[type]}   [description]
 	 */
 	handleSubmit = (e) => {
-		e.preventDefault();
 
+		e.preventDefault();
 		let keys = Object.keys(this.refs);
+		let isValid = true;
 
 		for (let i = keys.length - 1; i >= 0; i--) {
 			let key = keys[i];
-
 			if(this.refs[key] instanceof TextField) {
 				delete this.state.errors[key];
 				let input = this.refs[key].input;
-				if(!input.validity.valid) 
+				if(!input.validity.valid) {
 					this.state.errors[key] = true
+					isValid = false;
+				}
 			}
 		}
 
-
 		this.setState({
-			errors: this.state.errors
+			errors: this.state.errors,
+			valid: isValid
 		})
+
+		console.log(this)
+
+
+		if(!isValid) return false;
+
+		var loginData = {
+			email: this.refs.email.getValue(),
+			senha: this.refs.senha.getValue()
+		}
+
+		// AuthActions.login(loginData)
+		this.props.dispatch(AuthActions.makeLogin(loginData))
 	}
 
 

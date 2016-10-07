@@ -19,16 +19,17 @@ class AppNavBar extends Component {
 		</nav>
 	);
 
-	titleStyle = {
-		textAlign: 'left'
-	}
 
 	render() {
+    const titleStyle = {
+      textAlign: 'left'
+    };
+
 
 		return (
-			<AppBar 
-				title="Void" 
-				titleStyle={this.titleStyle}
+			<AppBar
+				title="Void"
+				titleStyle={titleStyle}
 				showMenuIconButton={false}
 				iconElementRight={this.navBarItems} />
 		)

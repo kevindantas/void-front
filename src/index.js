@@ -1,15 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 
-import App from './App';
+import App from './components/layout/Layout';
 import './index.css';
 
 import Auth from './components/Auth';
@@ -19,14 +19,12 @@ import Gallery from './components/Gallery';
 
 import reducers from './reducers';
 
+
 const store = createStore(
-	combineReducers({
-		...reducers,
-		routing: routerReducer
-	})
+	reducers,
 );
 
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>

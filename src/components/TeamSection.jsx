@@ -6,14 +6,6 @@ import '../css/TeamSection.css';
 class TeamSection extends Component {
 
 	render() {
-
-		const styles = {
-		  root: {
-		    display: 'flex',
-		    flexWrap: 'wrap',
-		    justifyContent: 'space-around',
-		  }
-		}
 		
 		return (
 			<section className="team-section">
