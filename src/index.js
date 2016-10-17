@@ -9,13 +9,17 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 
-import App from './components/layout/Layout';
+import Layout from './components/layout/Layout';
+import LayoutAdmin from './components/layout/LayoutAdmin';
 import './index.css';
 
 import Auth from './components/Auth';
 import Home from './components/Home';
 import Team from './components/Team';
 import Gallery from './components/Gallery';
+
+import Dashboard from './components/Dashboard';
+import TeamList from './components/admin/TeamList';
 
 import reducers from './reducers';
 
@@ -29,12 +33,18 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
   <Provider store={store}>
   	<Router history={history}>
-    	<Route path="/" component={App}>
+    	<Route path="/" component={Layout}>
         <IndexRoute component={Home} />
     		<Route path="galeria" component={Gallery} />
     		<Route path="equipe" component={Team} />
     	</Route>
       <Route path="/auth" component={Auth} />
+
+      <Route path="/admin" component={LayoutAdmin}>
+        <IndexRoute component={Dashboard} />
+        <Route path="galeria" component={Gallery} />
+        <Route path="equipe" component={TeamList} />
+      </Route>
     </Router>
   </Provider>,
   document.getElementById('root')
