@@ -1,0 +1,53 @@
+.Banner  {
+  position: relative;
+  display: flex;
+}
+
+.Banner .rest {
+  background: #00D8FF;
+  float: left;
+  width: 50%;
+height: 620px;
+  padding: 90px 0;
+}
+
+
+.Banner .react {
+  background: #356A86;
+  float: left;
+  width: 50%;
+height: 620px;
+  padding: 90px 0;
+}
+
+.Banner .react img {
+  width: 500px;
+  margin-top: 8%;
+  animation: spin 10s infinite linear;
+}
+
+.Banner .plus {
+  background: #fff;
+  width: 150px;
+  line-height: 150px;
+  position: absolute;
+  left: calc(50% - 150px/2);
+  top: calc(50% - 150px/2);
+  border-radius: 1000px;
+  font-size: 120px;
+  font-weight: 700;
+  color: #FF5621;
+}
+
+.Banner .Card.-break {
+  width: 60vw;
+  position: absolute;
+  bottom: -70px;
+  left: calc(50% - 30vw);
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 5px;
+  box-shadow: 3px 4px 10px rgba(0,0,0,.2);
+  font-size: 24px;
+  font-weight: 400 !important;
+}

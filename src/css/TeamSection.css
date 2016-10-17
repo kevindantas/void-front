@@ -1,10 +1,15 @@
 .team-section {
 	width: 100%;
+	min-height: 550px;
 	float: left;
 	text-align: left;
+	background: #029AE4 url(../TeamDec.svg) no-repeat 0 170px;
 	/*background: #474E97;*/
-	background: #029AE4; /* Blue * / 
 	/*background: #36464E; /* Blue grey * / */
+}
+
+.team-section.animate {
+	background: #029AE4 url(../TeamDec.svg) no-repeat 0 170px;
 }
 
 

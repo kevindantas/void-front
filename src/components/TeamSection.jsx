@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { GridList, GridTile } from 'material-ui/GridList';
 
 import '../css/TeamSection.css';
+// import TeamDec from '../TeamDec.svg';
 
 class TeamSection extends Component {
 
 	render() {
-		
 		return (
 			<section className="team-section">
 				<h1> Equipe </h1>
+				
 				<div>
 				<GridList 
 					rows={2}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="323.6" height="254" viewBox="0 0 323.6 254" overflow="scroll">
+	<style type="text/css">
+		@keyframes scaleUp {
+			0% {
+				transform: scaleX(0)
+			}
+
+			100% {
+				transform: scaleX(1)
+			}
+		}
+
+		g {
+			transform: scaleX(0);
+			animation: scaleUp 0.4s ease-in forwards;
+			will-change: transform
+		}
+
+		g:nth-child(3) { animation-delay: 0.2s }
+		g:nth-child(4) { animation-delay: 0.4s }
+		g:nth-child(5) { animation-delay: 0.6s }
+		g:nth-child(6) { animation-delay: 0.8s }
+		g:nth-child(7) { animation-delay: 1.0s }
+	</style>
+	<g fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M2 2h.5"/><path d="M28.1 2h280.2" stroke-dasharray="1.024 25.611"/>
+		<path d="M321.1 2h.5"/></g>
+	<g fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M2 52h.5"/>
+		<path d="M28.1 52h280.2" stroke-dasharray="1.024 25.611"/>
+		<path d="M321.1 52h.5"/>
+	</g>
+	<g fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M2 102h.5"/>
+		<path d="M28.1 102h280.2" stroke-dasharray="1.024 25.611"/>
+		<path d="M321.1 102h.5"/>
+	</g>
+	<g fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M2 152h.5"/>
+		<path d="M28.1 152h280.2" stroke-dasharray="1.024 25.611"/>
+		<path d="M321.1 152h.5"/>
+	</g>
+	<g fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M2 202h.5"/>
+		<path d="M28.1 202h280.2" stroke-dasharray="1.024 25.611"/>
+		<path d="M321.1 202h.5"/>
+	</g>
+	<g fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M2 252h.5"/>
+		<path d="M28.1 252h280.2" stroke-dasharray="1.024 25.611"/>
+		<path d="M321.1 252h.5"/>
+	</g>
+</svg>

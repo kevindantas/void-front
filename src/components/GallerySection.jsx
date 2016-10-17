@@ -4,6 +4,16 @@ import { GridList, GridTile } from 'material-ui/GridList';
 import '../css/GallerySection.css';
 
 class GallerySection extends Component {
+	state = {
+		width: window.innerWidth
+	}
+
+	componentDidMount() {
+		window.onresize = () => {
+			this.setState({width: window.innerWidth}); console.log(window.innerWidth)
+		}
+	}
+
 
 	renderTiles() {
 		const photos = [
