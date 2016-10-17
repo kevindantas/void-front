@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import '../../css/App.css';
 import AppNavBar from './AppNavBar';
 
-@connect(store => ({
-  user: store.user
-}))
+
 class App extends Component {
   render() {
     console.log(this.props.user);
