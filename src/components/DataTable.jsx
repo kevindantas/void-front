@@ -1,7 +1,7 @@
 import React,  { Component, PropTypes } from 'react'
 import  { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
-import RecordActions from '../RecordActions'
+import RecordActions from './RecordActions'
 
 class DataTable extends Component {
 

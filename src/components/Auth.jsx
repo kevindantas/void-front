@@ -18,13 +18,10 @@ export default class Auth extends Component {
 
 
 	/**
-	 * Handle submit and validate form
-	 * @param  {Event} e Triggered event
-	 * @return {[type]}   [description]
+	 * Validate form
+	 * @return {bool} If the form is valid
 	 */
-	handleSubmit = (e) => {
-
-		e.preventDefault();
+	validateForm() {
 		let keys = Object.keys(this.refs);
 		let isValid = true;
 
@@ -45,18 +42,33 @@ export default class Auth extends Component {
 			valid: isValid
 		})
 
-		console.log(this)
+
+		return isValid;
+	}
 
 
-		if(!isValid) return false;
+
+	/**
+	 * Handle submit and validate form
+	 * @param  {Event} e Triggered event
+	 * @return {[type]}   [description]
+	 */
+	handleSubmit = (e) => {
+		e.preventDefault();
+
+		if(!this.validateForm()) return false;
 
 		var loginData = {
 			email: this.refs.email.getValue(),
-			senha: this.refs.senha.getValue()
+			password: this.refs.senha.getValue()
 		}
 
+
+
+		AuthActions.makeLogin(loginData);
+
 		// AuthActions.login(loginData)
-		this.props.dispatch(AuthActions.makeLogin(loginData))
+		// this.props.dispatch(AuthActions.makeLogin(loginData))
 	}
 
 
@@ -96,7 +108,8 @@ export default class Auth extends Component {
 									required
 									fullWidth={true} 
 									floatingLabelText="Email" 
-									errorText={this.state.errors.email ? 'Email obrigatório' : ''} />
+									errorText={this.state.errors.email ? 'Email obrigatório' : ''} 
+									type="email" />
 
 								<TextField 
 									ref="senha"

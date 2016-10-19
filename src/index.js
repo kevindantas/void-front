@@ -20,7 +20,7 @@ import Gallery from './components/Gallery';
 import NotFound from './components/NotFound';
 
 import Dashboard from './components/Dashboard';
-import TeamList from './components/admin/TeamList';
+import MembersList from './containers/MembersList';
 
 import reducers from './reducers';
 
@@ -39,13 +39,13 @@ render(
     		<Route path="galeria" component={Gallery} />
     		<Route path="equipe" component={Team} />
     	</Route>
-      
+
       <Route path="/auth" component={Auth} />
 
       <Route path="/admin" component={LayoutAdmin}>
         <IndexRoute component={Dashboard} />
         <Route path="galeria" component={Gallery} />
-        <Route path="equipe" component={TeamList} />
+        <Route path="equipe" component={MembersList} />
         <Route path="*" component={NotFound} />
       </Route>
 

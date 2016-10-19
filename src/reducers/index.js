@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
-	authReducer,
-	membersReducer,
+	auth: authReducer,
+	members: membersReducer,
 	routing: routerReducer
 });
