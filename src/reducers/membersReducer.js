@@ -19,7 +19,6 @@ export default function membersReduce (state = {
 				done: true, 
 				members: action.payload
 		}
-
 		case 'NEW_MEMBERS': 
 			return {
 				...state, 

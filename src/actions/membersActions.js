@@ -5,6 +5,12 @@ export const receiveMembers = members => ({
 	members: members
 })
 
+export const fetchMembers = (form) => {
+		return {
+			type: 'FETCH_MEMBERS'
+		}
+}
+
 /*
 export const fetchMembers = () => dispatch => {
 	
