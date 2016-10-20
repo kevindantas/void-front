@@ -3,6 +3,14 @@ import  { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCo
 
 import RecordActions from './RecordActions'
 
+/**
+ * DataTable for generic data
+ *
+ * @property {Array<String>} headers - Headers names
+ * @property {Array<Object>} data - Data to display on TableBody
+ * @property {Bool} hasActions - If the table should have actions or not
+ * @property {Object} actions - The actions for each button
+ */
 class DataTable extends Component {
 
 
@@ -15,12 +23,13 @@ class DataTable extends Component {
 	static propTypes = {
 		headers: PropTypes.arrayOf(PropTypes.string),
 		data: PropTypes.arrayOf(PropTypes.object),
-		actions: PropTypes.bool
+		hasActions: PropTypes.bool,
+		actions: PropTypes.object
 	}
 
 
 	static defaultProps = {
-		actions: true
+		hasActions: true
 	}
 
 
@@ -34,7 +43,7 @@ class DataTable extends Component {
 
 		var tableHeaders = this.props.headers;
 
-		if(this.props.actions) 
+		if(this.props.hasActions) 
 			tableHeaders.push('Ações');
 
 
@@ -69,8 +78,9 @@ class DataTable extends Component {
 				<TableRowColumn>Foto</TableRowColumn>
 				<TableRowColumn style={tdStyle}>
 					<RecordActions 
-
-						/> 
+						viewAction={`/admin/equipe/${team.id}`}
+						editAction={`/admin/equipe/${team.id}`}
+						deleteAction={`/admin/equipe/${team.id}`} />
 				</TableRowColumn>
 			</TableRow>
 		));
