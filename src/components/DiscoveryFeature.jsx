@@ -49,8 +49,7 @@ class DiscoveryFeature extends Component {
 			width: this.props.size,
 			height: this.props.size,
 			position: 'fixed',
-			transform: 'scale(0.4)',
-			transformOrigin: 'right bottom',
+			transform: 'scale(0)',
 			transition: 'all 750ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
 		}
 
@@ -68,19 +67,23 @@ class DiscoveryFeature extends Component {
 			defaultInnerCircleStyle  = {};
 
 		if(coords) {
+			let innerWidth = coords.width / 2;
 			
 			var defaultInnerCircleStyle = {
 				width: coords.width*2,
 				height: coords.height*2,
-				position: 'fixed'
+				position: 'fixed',
+				transformOrigin: 'center',
+				transform: 'scale(0)',
+				transition: 'all 750ms cubic-bezier(0.23, 1, 0.32, 1) 200ms'
 			}
 			
 			positionCircle = {
 				left: coords.left-defaultCircleStyle.width/2,
 				top: coords.top-defaultCircleStyle.height/2,
+				transformOrigin: `${defaultCircleStyle.width/2+innerWidth}px ${defaultCircleStyle.height/2+innerWidth}px`,
 			}
 
-			let innerWidth = coords.width / 2;
 			innerCircle = {
 				left: coords.left-defaultInnerCircleStyle.width/2 + innerWidth,
 				top: coords.top-defaultInnerCircleStyle.height/2 + innerWidth,
@@ -96,8 +99,10 @@ class DiscoveryFeature extends Component {
 
 			document.body.addEventListener('click', closeFeature)
 
-			if(!this.state.closed)
+			if(!this.state.closed) {
 				positionCircle.transform = 'none';
+				innerCircle.transform = 'none';
+			}
 		}
 
 
@@ -113,9 +118,11 @@ class DiscoveryFeature extends Component {
 					circle={true}>
 						<h3 style={textStyle}>Clique nesse botão para cadastrar membros</h3>
 				</Paper>
-				<Paper ref="discovery" style={innerCircleStyle} circle={true} zDepth={0}>
-					{ this.props.children }
+				<Paper style={innerCircleStyle} circle={true} zDepth={0}>
 				</Paper>
+				<div  ref="discovery">
+					{ this.props.children }
+				</div>
 			</div>
 		);
 	}
