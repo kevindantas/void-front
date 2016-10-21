@@ -1,7 +1,7 @@
 import * as Action from '../constants/ActionTypes';
 
 export default function membersReduce (state = {
-	members: null,
+	members: [],
 	loading: false,
 	done: false,
 	error: null
@@ -9,7 +9,7 @@ export default function membersReduce (state = {
 
 	switch(action.type) {
 		case 'FETCH_MEMBERS':
-			return {...state, loading: false}
+			return {loading: false, data: action.payload}
 		case 'FETCH_MEMBERS_ERROR':
 			return {...state, loading: false, error: action.payload}
 		case 'FETCH_MEMBERS_DONE': 

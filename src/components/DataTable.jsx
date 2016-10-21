@@ -68,6 +68,14 @@ class DataTable extends Component {
 	 * @return {Array}
 	 */
 	renderBody() {
+
+		if(!this.props.data || this.props.data.length < 1)
+			return (
+				<TableRow>
+					<TableRowColumn style={{textAlign: 'center'}}>Nenhum registro encontrado</TableRowColumn>
+				</TableRow>
+			);
+
 		const tdStyle = {
 			overflow: 'visible'
 		}
@@ -95,10 +103,7 @@ class DataTable extends Component {
 	render() {
 		return (
 			<Table selectable={false} bodyStyle={{overflow: 'visible'}}>
-				
-						{ this.renderHeader() }
-
-
+				{ this.renderHeader() }
 				<TableBody
 					preScanRows={false}
 					displayRowCheckbox={false}>
