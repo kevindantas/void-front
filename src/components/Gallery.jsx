@@ -4,11 +4,10 @@ class Gallery extends Component {
 
 	render() {
 		const style = {
-  marginRight: 20,
-};
+		  marginRight: 20,
+		};
 		return (
 			<div>
-
 			</div>
 		);
 	}

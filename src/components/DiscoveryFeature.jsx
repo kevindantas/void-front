@@ -105,7 +105,7 @@ class DiscoveryFeature extends Component {
 			}
 		}
 
-
+		// positionCircle.transformTimingFunction = 'cubic-bezier(0.79,-0.17, 0.82, 0.1)';
 		var circleStyle = Object.assign(defaultCircleStyle, positionCircle),
 		 	innerCircleStyle = Object.assign(defaultInnerCircleStyle, innerCircle),
 			textStyle = Object.assign(defaultTextStyle, this.props.textStyle);

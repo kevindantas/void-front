@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import FAB from 'material-ui/FloatingActionButton'
-import AddIcon from 'material-ui/svg-icons/content/add';
 
-import * as membersActions from '../actions/membersActions'
+import  AddMember from '../components/AddMember'
 import  DataTable from '../components/DataTable'
-import DiscoveryFeature from '../components/DiscoveryFeature'
+import * as membersActions from '../actions/membersActions'
 
 class MembersList extends Component {
 	state = {
@@ -17,25 +15,18 @@ class MembersList extends Component {
 	}
 
 	render() {
-		const fabStyle = {
-			position: 'fixed',
-			bottom: '5%',
-			right: '5%'
-		}
-
-		console.log(this.state.modalOpen)
+		
+		
 		return (
 			<div>
 				<h1>Equipe</h1>
 				<DataTable 
 					headers={['Nome', 'Foto']}
 					data={this.props.members} />
-				<DiscoveryFeature 
-					open={this.props.members && this.props.members.length < 1}>
-					<FAB style={fabStyle} onClick={() => this.setState({ modalOpen: true })}>
-						<AddIcon color="#ffffff" /> 
-					</FAB>
-				</DiscoveryFeature>
+				
+				<AddMember 
+					hasFeature={this.props.members && this.props.members.length < 1}
+					open={this.state.modalOpen} />
 			</div>
 		);
 	}
