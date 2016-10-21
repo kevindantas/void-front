@@ -5,38 +5,71 @@ import EditIcon from 'material-ui/svg-icons/image/edit'
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever'
 
 
+/**
+ * Default CRUD Actions
+ *
+ * @property {string|function} viewAction - Actions for the viewButton
+ * @property {string|function} editAction - Actions for the editButton
+ * @property {string|function} deleteAction - Actions for the deleteButton
+ * 
+ * @param  {object} props Properties from the component
+ * @return {DOM}       
+ */
+const RecordActions = (props) => {
 
-const RecordActions = (props) => (
-	<div>
-		<IconButton 
-			touch={true}
-			tooltip="Detalhes" 
-			tooltipPosition="top-center">
-			<ViewIcon color="#666" />
-		</IconButton>
+	var viewButton,
+		editButton,
+		deleteButton;
 
-		<IconButton 
-			touch={true}
-			tooltip="Editar" 
-			tooltipPosition="top-center">
-			<EditIcon color="#666" />
-		</IconButton>
+	if(props.viewAction) {
+		viewButton = (
+			<IconButton 
+				touch={true}
+				tooltip="Detalhes" 
+				tooltipPosition="top-center">
+				<ViewIcon color="#666" />
+			</IconButton>
+		);
+	}
 
-		<IconButton 
-			touch={true}
-			tooltip="Deletar" 
-			tooltipPosition="top-center">
-			<DeleteIcon color="#666" />
-		</IconButton>
-	</div>
-);
+	if(props.editAction) {
+		editButton = (
+			<IconButton 
+				touch={true}
+				tooltip="Editar" 
+				tooltipPosition="top-center">
+				<EditIcon color="#666" />
+			</IconButton>
+		);
+	}
+
+
+	if(props.deleteAction) {
+		deleteButton = (
+			<IconButton 
+				touch={true}
+				tooltip="Deletar" 
+				tooltipPosition="top-center">
+				<DeleteIcon color="#666" />
+			</IconButton>
+		);
+	}
+
+	return (
+		<div>
+			{ viewButton }
+			{ editButton }
+			{ deleteButton }
+		</div>
+	);
+};
 
 
 
 const Validation = PropTypes.oneOfType([
 			PropTypes.string,
 			PropTypes.func
-		]).isRequired;
+		]);
 
 RecordActions.propTypes = {
 	viewAction: Validation,

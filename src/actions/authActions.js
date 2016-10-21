@@ -1,77 +1,31 @@
 import Auth from '../api/Auth';
-
 import * as types from '../constants/ActionTypes';
-
-export const makeLogin = user => ({
-	type: types.FETCH_AUTH,
-	user: user
-});
-
-/*export const login = form => dispatch => (form) => {
-	console.log(form);
-	Auth.login(response => {
-		console.log(response);
-		dispatch(login())
-	})
-};
-*/
+import * as auth from '../constants/ActionTypes';
+import * as Endpoints from '../constants/Endpoints';
 
 
-/*
-export const login = (form) => dispatch => 
-	fetch('http://awefawef.com')
-		.then(response => dispatch({ type: 'FETCH_AUTH_DONE', payload: response }))
-    .catch(e => dispatch({ type: 'FETCH_AUTH_ERROR', payload: e }))
-*/
+export const login = (form, dispatch) => {console.log(form, dispatch); return dispatch => {
+		console.log(123123123);
+		return fetch(Endpoints.API_URL+'/auth', {
+			method: 'POST',
+			headers: {
+			    'Accept': 'application/json',
+	    		'Content-Type': 'application/json',
+				Authorization: `Basic ${btoa(form.email + ':' + form.password)}`,
+			},
+			body: JSON.stringify({
+				access_token: '7a7ZLZ2NqC1KHJGbxhHmzw4fT9xGLryn'
+			})
+		})
+		.then(response => ({type: 'FETCH_AUTH_DONE', payload: response}))
+		.catch(e => ({type: 'FETCH_AUTH_ERROR', payload: e}))
+}}
 
-export function login(form) {
-	return fetch('http://fwaefawe.com/lista')
-					.then(response => ({type: 'FETCH_AUTH_DONE', payload: response}))
-					.catch(e => ({type: 'FETCH_AUTH_ERROR', payload: e}))
-}
-
-/*
-let nextTodoId = 0
-export const addTodo = (text) => {
-  return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
-  }
-}
-
-export const setVisibilityFilter = (filter) => {
-  return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-  }
-}*/
-/*
-export function login (form) {
-  /*dispatch => fetch('http://fawefawe.com')
-		.then(response => dispatch({type: 'FETCH_AUTH_DONE', payload: response}))
-		.catch(e => dispatch({type: 'FETCH_AUTH_ERROR', payload: e}))*
-		console.log(12312312312312)
-	return function (dispatch) {
-		console.log(this)
-		return fetch('http://fawefawe.com')
-			.then(response => dispatch({type: 'FETCH_AUTH_DONE', payload: response}))
-			.catch(e => dispatch({type: 'FETCH_AUTH_ERROR', payload: e}))
+// Pure function
+export const makeLogin = (auth) => {
+	console.log(auth)
+	return {
+		type: 'AUTH_FETCH',
+		payload: auth
 	}
 }
-*/
-
-
-
-/**
- * Equivalent ES5
- *
- * var login = function() {
- * 	return function dispatch() {
- * 		Auth.login(function (response) {
- * 			dispatch(login())
- * 		})
- * 	}
- * }
- *
- */

@@ -1,8 +1,16 @@
 import React,  { Component, PropTypes } from 'react'
 import  { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 
-import RecordActions from '../RecordActions'
+import RecordActions from './RecordActions'
 
+/**
+ * DataTable for generic data
+ *
+ * @property {Array<String>} headers - Headers names
+ * @property {Array<Object>} data - Data to display on TableBody
+ * @property {Bool} hasActions - If the table should have actions or not
+ * @property {Object} actions - The actions for each button
+ */
 class DataTable extends Component {
 
 
@@ -15,12 +23,13 @@ class DataTable extends Component {
 	static propTypes = {
 		headers: PropTypes.arrayOf(PropTypes.string),
 		data: PropTypes.arrayOf(PropTypes.object),
-		actions: PropTypes.bool
+		hasActions: PropTypes.bool,
+		actions: PropTypes.object
 	}
 
 
 	static defaultProps = {
-		actions: true
+		hasActions: true
 	}
 
 
@@ -34,7 +43,7 @@ class DataTable extends Component {
 
 		var tableHeaders = this.props.headers;
 
-		if(this.props.actions) 
+		if(this.props.hasActions) 
 			tableHeaders.push('Ações');
 
 
@@ -59,6 +68,14 @@ class DataTable extends Component {
 	 * @return {Array}
 	 */
 	renderBody() {
+
+		if(!this.props.data || this.props.data.length < 1)
+			return (
+				<TableRow>
+					<TableRowColumn style={{textAlign: 'center'}}>Nenhum registro encontrado</TableRowColumn>
+				</TableRow>
+			);
+
 		const tdStyle = {
 			overflow: 'visible'
 		}
@@ -69,8 +86,9 @@ class DataTable extends Component {
 				<TableRowColumn>Foto</TableRowColumn>
 				<TableRowColumn style={tdStyle}>
 					<RecordActions 
-
-						/> 
+						viewAction={`/admin/equipe/${team.id}`}
+						editAction={`/admin/equipe/${team.id}`}
+						deleteAction={`/admin/equipe/${team.id}`} />
 				</TableRowColumn>
 			</TableRow>
 		));
@@ -85,10 +103,7 @@ class DataTable extends Component {
 	render() {
 		return (
 			<Table selectable={false} bodyStyle={{overflow: 'visible'}}>
-				
-						{ this.renderHeader() }
-
-
+				{ this.renderHeader() }
 				<TableBody
 					preScanRows={false}
 					displayRowCheckbox={false}>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -20,13 +21,14 @@ import Gallery from './components/Gallery';
 import NotFound from './components/NotFound';
 
 import Dashboard from './components/Dashboard';
-import TeamList from './components/admin/TeamList';
+import MembersList from './containers/MembersList';
 
 import reducers from './reducers';
 
 
 const store = createStore(
 	reducers,
+  applyMiddleware(thunk)
 );
 
 const history = syncHistoryWithStore(browserHistory, store);
@@ -39,13 +41,13 @@ render(
     		<Route path="galeria" component={Gallery} />
     		<Route path="equipe" component={Team} />
     	</Route>
-      
+
       <Route path="/auth" component={Auth} />
 
       <Route path="/admin" component={LayoutAdmin}>
         <IndexRoute component={Dashboard} />
         <Route path="galeria" component={Gallery} />
-        <Route path="equipe" component={TeamList} />
+        <Route path="equipe" component={MembersList} />
         <Route path="*" component={NotFound} />
       </Route>
 

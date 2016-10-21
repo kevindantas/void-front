@@ -13,9 +13,9 @@ class AppNavBar extends Component {
 
 	navBarItems = (
 		<nav>
-			<FlatButton style={this.navBarItemsStyle} label="Galeria" />
-			<FlatButton style={this.navBarItemsStyle} label="Membros" />
-			<FlatButton style={this.navBarItemsStyle} label="Login" />
+			<FlatButton style={this.navBarItemsStyle} label="Galeria" href="/galeria" />
+			<FlatButton style={this.navBarItemsStyle} label="Equipe" href="/equipe" />
+			<FlatButton style={this.navBarItemsStyle} label="Login" href="/auth" />
 		</nav>
 	);
 

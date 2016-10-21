@@ -13,9 +13,9 @@ class NavBarAdmin extends Component {
 
 	navBarItems = (
 		<nav>
-			<FlatButton style={this.navBarItemsStyle} label="Galeria" />
-			<FlatButton style={this.navBarItemsStyle} label="Membros" />
-			<FlatButton style={this.navBarItemsStyle} label="Logout" />
+			<FlatButton style={this.navBarItemsStyle} label="Galeria" href="/admin/galeria" />
+			<FlatButton style={this.navBarItemsStyle} label="Equipe" href="/admin/equipe" />
+			<FlatButton style={this.navBarItemsStyle} label="Logout" href="/admin/" />
 		</nav>
 	);
 
