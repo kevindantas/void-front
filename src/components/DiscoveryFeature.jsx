@@ -16,11 +16,16 @@ class DiscoveryFeature extends Component {
 		size: 1100
 	}
 
+
 	static propTypes = {
 		color: PropTypes.string,
 		size: PropTypes.oneOfType([
 			PropTypes.string,
 			PropTypes.number
+			]),
+		text: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.node
 			]),
 		textStyle: PropTypes.object
 	}
@@ -41,6 +46,39 @@ class DiscoveryFeature extends Component {
 
 
 
+
+	/**
+	 * Render the feature description
+	 * 
+	 */
+	renderText() {
+
+		if(!this.props.text) 
+			return;
+
+		const defaultTextStyle = {
+			maxWidth: 320,
+			color: '#fff',
+			position: 'relative',
+			left: '15%',
+			top: '25%',
+		}
+
+
+		var textStyle = Object.assign(defaultTextStyle, this.props.textStyle);
+
+		if(typeof this.props.text == 'string')
+			return (<h3 style={textStyle}>{this.props.text}</h3>);
+
+		return <div style={textStyle}>{this.props.text}</div>;
+	}
+
+	circleTransition = {
+		transition: 'all 750ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
+	};
+
+
+
 	render() {
 		var { coords } = this.state;
 
@@ -50,16 +88,9 @@ class DiscoveryFeature extends Component {
 			height: this.props.size,
 			position: 'fixed',
 			transform: 'scale(0)',
-			transition: 'all 750ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
 		}
 
-		const defaultTextStyle = {
-			maxWidth: 320,
-			color: '#fff',
-			position: 'relative',
-			left: '25%',
-			top: '25%',
-		}
+
 
 
 		var positionCircle 	= {},
@@ -75,7 +106,7 @@ class DiscoveryFeature extends Component {
 				position: 'fixed',
 				transformOrigin: 'center',
 				transform: 'scale(0)',
-				transition: 'all 750ms cubic-bezier(0.23, 1, 0.32, 1) 200ms'
+				transition: 'all 1100ms cubic-bezier(0.23, 1, 0.32, 1) 350ms'
 			}
 			
 			positionCircle = {
@@ -90,6 +121,10 @@ class DiscoveryFeature extends Component {
 			}
 		}
 
+
+
+
+		var circleTransition = {};
 		if(this.props.open) {
 
 			const closeFeature = () => {
@@ -105,18 +140,16 @@ class DiscoveryFeature extends Component {
 			}
 		}
 
-		// positionCircle.transformTimingFunction = 'cubic-bezier(0.79,-0.17, 0.82, 0.1)';
-		var circleStyle = Object.assign(defaultCircleStyle, positionCircle),
-		 	innerCircleStyle = Object.assign(defaultInnerCircleStyle, innerCircle),
-			textStyle = Object.assign(defaultTextStyle, this.props.textStyle);
+		var circleStyle = Object.assign(defaultCircleStyle, positionCircle, this.circleTransition),
+		 	innerCircleStyle = Object.assign(defaultInnerCircleStyle, innerCircle);
 
-		
 		return (
 			<div>
 				<Paper 
+					onTransitionEnd={() => this.circleTransition.transition = 'all 650ms cubic-bezier(0.79,-0.17, 0.82, 0.1)'}
 					style={circleStyle}
 					circle={true}>
-						<h3 style={textStyle}>Clique nesse botão para cadastrar membros</h3>
+					{ this.renderText() }
 				</Paper>
 				<Paper style={innerCircleStyle} circle={true} zDepth={0}>
 				</Paper>
