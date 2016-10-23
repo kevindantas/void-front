@@ -10,12 +10,13 @@ class Banner extends Component {
 	render() {
 		return (
 			<div className="Banner">
-				<div className="rest">
-					<img src={REST} />
-				</div>
-				<span className="plus">+</span>
-				<div className="react">
-					<img src={ReactLogo} />
+				<div className="BannerWrapper">
+					<div className="rest">
+						<img src={REST} />
+					</div>
+					<div className="react">
+						<img src={ReactLogo} />
+					</div>
 				</div>
 
 				<div className="Card -break">

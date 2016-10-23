@@ -10,7 +10,7 @@ class GallerySection extends Component {
 
 	componentDidMount() {
 		window.onresize = () => {
-			this.setState({width: window.innerWidth}); console.log(window.innerWidth)
+			this.setState({width: window.innerWidth});
 		}
 	}
 
@@ -45,7 +45,7 @@ class GallerySection extends Component {
 		  }]
 
 		return photos.map(photo => (
-			<GridTile 
+			<GridTile
 	          	cols={photo.featured ? 3 : 2}
 	          	rows={photo.featured ? 2 : 1}
 				title={photo.title}
@@ -65,12 +65,12 @@ class GallerySection extends Component {
 		    justifyContent: 'space-around',
 		  }
 		}
-		
+
 		return (
 			<section className="gallery-section">
 				<h1> Galeria </h1>
 				<div style={styles.root}>
-				<GridList 
+				<GridList
 					style={styles.gridList}
 					rows={2}
 					cols={7}
