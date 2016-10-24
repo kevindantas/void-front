@@ -41,7 +41,7 @@ class AddMember extends Component {
 	}
 
 	handleSend = () => {
-
+		console.log(this)
 	}
 
 
@@ -52,7 +52,7 @@ class AddMember extends Component {
 	render() {
 		const modalAction = [
 			<FlatButton label="Cancelar" onClick={this.handleClose} />,
-			<RaisedButton label="Cadastrar" primary={true} />
+			<RaisedButton label="Cadastrar" primary={true} onClick={this.handleSend} />
 		];
 
 		const fabStyle = {
@@ -75,10 +75,23 @@ class AddMember extends Component {
 		}
 
 
+		const imageInputStyle = {
+			position: 'absolute',
+			left: 0,
+			right: 0,
+			top: 0,
+			bottom: 0,
+			width: '100%',
+			opacity: 0,
+			cursor: 'pointer',
+		}
+
 
 		return (
 			<div>
 				<DiscoveryFeature 
+					text="Cadastre novos membros da equipe aqui"
+					textStyle={{fontSize: 25}}
 					open={this.props.hasFeature}>
 					<FAB style={fabStyle} onClick={() => this.setState({ modalOpen: true })}>
 						<AddIcon color="#ffffff" /> 
@@ -90,19 +103,26 @@ class AddMember extends Component {
 					onRequestClose={this.handleClose}
 					title="Cadastrar novo membro"
 					actions={modalAction}>
-					<form>
+					<form name="newMember" ref="memberForm">
 						<TextField 
 							name="nome"
 							fullWidth={true}
 							floatingLabelText="Nome" />
 
 						<TextField 
-							name="foto"
+							name="fotoURL"
 							fullWidth={true}
 							hintText="Insira a URL da foto"
 							onChange={this.handleChange}
 							floatingLabelText="Foto" />
-						
+
+						<RaisedButton
+							label="Escolha a imagem"
+							labelPosition="before"
+							containerElement="label">
+							<input name="fotoFile" type="file" style={imageInputStyle} />
+						</RaisedButton>
+
 						<img 
 							style={imgStyle}  
 							alt="Preview image" 

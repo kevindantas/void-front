@@ -1,31 +1,20 @@
 import Auth from '../api/Auth';
-import * as types from '../constants/ActionTypes';
-import * as auth from '../constants/ActionTypes';
 import * as Endpoints from '../constants/Endpoints';
+import axios from 'axios';
 
+export const login = form => dispatch => {
 
-export const login = (form, dispatch) => {console.log(form, dispatch); return dispatch => {
-		console.log(123123123);
-		return fetch(Endpoints.API_URL+'/auth', {
-			method: 'POST',
+    var body = {
+      access_token: '7a7ZLZ2NqC1KHJGbxhHmzw4fT9xGLryn'
+    };
+
+		axios.post(Endpoints.API_URL+'/auth', body, {
 			headers: {
-			    'Accept': 'application/json',
-	    		'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
 				Authorization: `Basic ${btoa(form.email + ':' + form.password)}`,
 			},
-			body: JSON.stringify({
-				access_token: '7a7ZLZ2NqC1KHJGbxhHmzw4fT9xGLryn'
-			})
 		})
-		.then(response => ({type: 'FETCH_AUTH_DONE', payload: response}))
-		.catch(e => ({type: 'FETCH_AUTH_ERROR', payload: e}))
-}}
-
-// Pure function
-export const makeLogin = (auth) => {
-	console.log(auth)
-	return {
-		type: 'AUTH_FETCH',
-		payload: auth
-	}
-}
+		.then(response => dispatch({type: 'FETCH_AUTH_DONE', payload: response.data}))
+		.catch(e => dispatch({type: 'FETCH_AUTH_ERROR', payload: e.response}))
+};

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as AuthActions from '../actions/authActions';
 
@@ -9,11 +9,24 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-export default class Auth extends Component {
+class Auth extends Component {
 	state = {
 		valid: true,
 		errors: {}
-	}
+	};
+
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+
+
+
+	componentDidUpdate() {
+    if (this.props.token && this.props.user) {
+      this.context.router.push('/admin')
+    }
+  }
 
 
 
@@ -56,7 +69,8 @@ export default class Auth extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		if(!this.validateForm()) return false;
+
+    if(!this.validateForm()) return false;
 
 		var loginData = {
 			email: this.refs.email.getValue(),
@@ -65,59 +79,70 @@ export default class Auth extends Component {
 
 
 
-		AuthActions.makeLogin(loginData);
 
-		// AuthActions.login(loginData)
+		this.props.dispatch(AuthActions.login(loginData));
 		// this.props.dispatch(AuthActions.makeLogin(loginData))
-	}
+	};
+
+
+  renderError() {
+    var { error } = this.props;
+
+    if(!error) return;
+
+    if(error.status !== 500)
+      return (<p className="error">Email e/ou senha incorretos</p>)
+
+    return (<p className="error">Ocorreu um erro no servidor, caso o problema continue entre em contato com o admin</p>)
+  }
 
 
 	/**
 	 * Render component
 	 */
 	render() {
-		const styles = {
+
+    const styles = {
 			wrapper: {
 				width: '100vw',
 				height: '100vh',
-				background: '#445963'
+				background: '#445963',
+        textAlign: 'center',
+        display: 'flex'
 			},
 			Card: {
-				width: 500,
-				height: 350,
-				marginTop: -150,
-				marginLeft: -250,
-				position: 'absolute',
-				top: '30%',
-				left: '50%',
+				maxWidth: 500,
+        margin: 'auto'
 			},
 			CardActions: {
 				textAlign: 'center'
 			}
-		}
+		};
 
 		return (
 			<MuiThemeProvider>
 				<div style={styles.wrapper}>
-					<Card style={styles.Card}>
+					<Card style={styles.Card} zDepth={4}>
 						<CardTitle title="Login"/>
 						<CardText>
 							<form action="#" onSubmit={this.handleSubmit} noValidate>
-								<TextField 
+								<TextField
 									ref="email"
 									required
-									fullWidth={true} 
-									floatingLabelText="Email" 
-									errorText={this.state.errors.email ? 'Email obrigatório' : ''} 
+									fullWidth={true}
+									floatingLabelText="Email"
+									errorText={this.state.errors.email ? 'Email obrigatório' : ''}
 									type="email" />
 
-								<TextField 
+								<TextField
 									ref="senha"
 									required
-									fullWidth={true} 
-									floatingLabelText="Senha" 
-									errorText={this.state.errors.senha ? 'Senha obrigatória' : ''} 
+									fullWidth={true}
+									floatingLabelText="Senha"
+									errorText={this.state.errors.senha ? 'Senha obrigatória' : ''}
 									type="password" />
+
+                { this.renderError() }
 
 								<CardActions style={styles.CardActions}>
 									<RaisedButton type="submit" label="Login" primary={true} />
@@ -130,3 +155,13 @@ export default class Auth extends Component {
 		);
 	}
 }
+
+
+function mapStateToProps (state) {
+  return {
+    token: state.auth.token,
+    user: state.auth.user,
+    error: state.auth.error
+  }
+}
+export default connect(mapStateToProps)(Auth);

@@ -18,11 +18,3 @@ export const fetchMembers = form => dispatch => (
 			payload: e
 		}))
 	)
-
-
-/*
-export const fetchMembers = () => dispatch => {
-	
-		dispatch(receiveMembers({}))
-	
-}*/
