@@ -21,6 +21,13 @@ class Auth extends Component {
   };
 
 
+  componentWillMount() {
+    var token = localStorage.getItem('void-token');
+    var user  = localStorage.getItem('void-user');
+
+    if(token && user)
+      this.context.router.replace('/admin');
+  }
 
 	componentDidUpdate() {
     if (this.props.token && this.props.user) {

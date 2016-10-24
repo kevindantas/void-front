@@ -31,9 +31,15 @@ class AppNavBar extends Component {
       onlyLogged: false
     },
     {
+      label: 'Usuários',
+      href: '/admin/usuarios',
+      onlyLogged: true
+    },
+    {
       label: 'Login',
       href: '/auth',
-      onlyLogged: false
+      onlyLogged: false,
+      onlyAnom: true
     },
     {
       label: 'Logout',
@@ -46,8 +52,7 @@ class AppNavBar extends Component {
 		<nav>
       {
         this.navigation.map(item =>{
-          console.log(this.props);
-            if(item.onlyLogged && !this.props.token)
+            if(item.onlyLogged && !this.props.token || item.onlyAnom && this.props.token)
               return;
 
             return <FlatButton
@@ -65,10 +70,12 @@ class AppNavBar extends Component {
   drawerItems = (
     <nav>
       {
-        this.navigation.map(item =>
-          (
-            <MenuItem key={item.label} onTouchTap={this.handleClose} href={item.href}>{item.label}</MenuItem>
-          )
+        this.navigation.map(item => {
+          if(item.onlyLogged && !this.props.token || item.onlyAnom && this.props.token)
+            return;
+
+            return <MenuItem key={item.label} onTouchTap={this.handleClose} href={item.href}>{item.label}</MenuItem>
+          }
         )
       }
     </nav>
@@ -88,7 +95,6 @@ class AppNavBar extends Component {
       textAlign: 'left'
     };
 
-    console.log(this.state.mobile);
 
 		return (
 		  <div>

@@ -1,6 +1,6 @@
 export default function authReducer (state = {
-	token: null,
-	user: null,
+	token: localStorage.getItem('void-token') ? localStorage.getItem('void-token') : null,
+	user: localStorage.getItem('void-user') ? JSON.parse(localStorage.getItem('void-user')) : null,
 	auth: null,
 	loading: false,
 	done: false,

@@ -16,8 +16,9 @@ export const login = form => dispatch => {
 			},
 		})
 		.then(response => {
-      localStorage.setItem('void-token', JSON.stringify({token: response.token}));
-      localStorage.setItem('void-user', JSON.stringify({user: response.user}));
+      console.log(JSON.stringify(response.data.user))
+      localStorage.setItem('void-token', response.data.token);
+      localStorage.setItem('void-user', JSON.stringify(response.data.user));
       dispatch({type: 'FETCH_AUTH_DONE', payload: response.data})
 		})
 		.catch(e => dispatch({type: 'FETCH_AUTH_ERROR', payload: e.response}))
