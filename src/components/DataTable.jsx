@@ -1,5 +1,7 @@
 import React,  { Component, PropTypes } from 'react'
 import  { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import LinearProgress from 'material-ui/LinearProgress';
+
 
 import RecordActions from './RecordActions'
 
@@ -18,7 +20,7 @@ class DataTable extends Component {
 	 * Component validations
 	 * @type {Object} -
 	 *       headers {Array<String>=} Header names
-	 *       data {Array<Object>} 
+	 *       data {Array<Object>}
 	 */
 	static propTypes = {
 		headers: PropTypes.arrayOf(PropTypes.string),
@@ -35,7 +37,7 @@ class DataTable extends Component {
 
 	/**
 	 * Render the thead columns
-	 * @return {Array} 
+	 * @return {Array}
 	 */
 	renderHeader() {
 		if(!this.props.headers) return;
@@ -43,7 +45,7 @@ class DataTable extends Component {
 
 		var tableHeaders = this.props.headers;
 
-		if(this.props.hasActions) 
+		if(this.props.hasActions)
 			tableHeaders.push('Ações');
 
 
@@ -62,12 +64,55 @@ class DataTable extends Component {
 
 
 
+	renderColumns(data) {
+    const imageStyle = {
+      maxWidth: '100%',
+      maxHeight: 70,
+      padding: 8,
+      borderRadius: 1000
+
+    };
+
+
+    var arr = [];
+    for(var ind in data) {
+      switch (ind) {
+        case 'id':
+          break;
+        case 'updatedAt':
+          break;
+        case 'createdAt':
+          break;
+        case 'picture':
+          arr.push(<TableRowColumn key={ind}><img style={imageStyle} src={data[ind]} alt={data.id} /></TableRowColumn>);
+          break;
+        case 'photo':
+          arr.push(<TableRowColumn key={ind}><img style={imageStyle} src={data[ind]} alt={data.id} /></TableRowColumn>);
+          break;
+        default:
+          arr.push(<TableRowColumn key={ind}>{data[ind]}</TableRowColumn>);
+          break;
+      }
+    }
+
+    return arr;
+    // <TableRowColumn>{team.name}</TableRowColumn>
+    // <TableRowColumn>Foto</TableRowColumn>
+  }
+
 	/**
 	 * Render the tbody content
-	 * 
+	 *
 	 * @return {Array}
 	 */
 	renderBody() {
+
+
+    if(!this.props.data) {
+      return (<TableRow>
+        <TableRowColumn style={{textAlign: 'center'}}><LinearProgress mode="indeterminate" />Carregando </TableRowColumn>
+      </TableRow>);
+    }
 
 		if(!this.props.data || this.props.data.length < 1)
 			return (
@@ -80,25 +125,28 @@ class DataTable extends Component {
 			overflow: 'visible'
 		}
 
-		return this.props.data.map((team, i) => (
-			<TableRow key={i} hoverable={true}>
-				<TableRowColumn>Kevin Dantas</TableRowColumn>
-				<TableRowColumn>Foto</TableRowColumn>
-				<TableRowColumn style={tdStyle}>
-					<RecordActions 
-						viewAction={`/admin/equipe/${team.id}`}
-						editAction={`/admin/equipe/${team.id}`}
-						deleteAction={`/admin/equipe/${team.id}`} />
-				</TableRowColumn>
-			</TableRow>
-		));
+		return this.props.data.map((team, i) => {
+      return <TableRow key={i} hoverable={true}>
+
+
+        { this.renderColumns(team) }
+
+
+        <TableRowColumn style={tdStyle}>
+          <RecordActions
+            viewAction={`/admin/equipe/${team.id}`}
+            editAction={`/admin/equipe/${team.id}`}
+            deleteAction={`/admin/equipe/${team.id}`}/>
+        </TableRowColumn>
+      </TableRow>
+    });
 	}
 
 
 
 	/**
 	 * Render component
-	 * 
+	 *
 	 */
 	render() {
 		return (
