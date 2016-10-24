@@ -75,7 +75,7 @@ class DataTable extends Component {
       borderRadius: 1000
 
     };
-
+// console.log(this.props.data)
 
     var arr = [];
     for(var ind in data) {
@@ -92,7 +92,11 @@ class DataTable extends Component {
         case 'photo':
           arr.push(<TableRowColumn key={ind}><img style={imageStyle} src={data[ind]} alt={data.id} /></TableRowColumn>);
           break;
+        case 'user': 
+        	arr.push(<TableRowColumn key={ind}>{data[ind].name}</TableRowColumn>);
+          break;
         default:
+        	if(data[ind])
           arr.push(<TableRowColumn key={ind}>{data[ind]}</TableRowColumn>);
           break;
       }

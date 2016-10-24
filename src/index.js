@@ -6,10 +6,6 @@ import thunk from 'redux-thunk';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
-
 import Layout from './components/layout/Layout';
 import LayoutAdmin from './components/layout/LayoutAdmin';
 import './index.css';
@@ -22,9 +18,13 @@ import NotFound from './components/NotFound';
 
 import Dashboard from './components/Dashboard';
 import MembersList from './containers/MembersList';
+import PhotosList from './containers/PhotosList';
+import UsersList from './containers/UsersList';
 
 import reducers from './reducers';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 const store = createStore(
 	reducers,
@@ -46,9 +46,9 @@ render(
 
       <Route path="/admin" component={LayoutAdmin}>
         <IndexRoute component={Dashboard} />
-        <Route path="galeria" component={Gallery} />
+        <Route path="galeria" component={PhotosList} />
         <Route path="equipe" component={MembersList} />
-        <Route path="*" component={NotFound} />
+        <Route path="usuarios" component={UsersList} />
       </Route>
 
       <Route path="*" component={NotFound} />
