@@ -17,4 +17,24 @@ export const fetchMembers = form => dispatch => (
 			type: 'FETCH_MEMBERS_FAILED',
 			payload: e
 		}))
-	)
+	);
+
+let config = {
+  headers: {
+    Authorization: 'Bearer '+localStorage.getItem('void-token')
+  }
+}
+
+export const createMember = data => dispatch => (
+  axios.post(`${Endpoints.API_URL}/team`, data, config)
+    .then(response => dispatch({
+      type: 'CREATE_MEMBERS',
+      payload: response.data
+    }))
+    .catch(e => dispatch({
+      type: 'CREATE_MEMBERS_FAILED',
+      payload: e
+    }))
+)
+
+

@@ -14,17 +14,23 @@ class MembersList extends Component {
 		this.props.dispatch(membersActions.fetchMembers())
 	}
 
+
+	handleCreate(data) {
+    this.props.dispatch(membersActions.createMember(data));
+  }
+
 	render() {
-		
-		
+
+
 		return (
 			<div>
 				<h1>Equipe</h1>
-				<DataTable 
+				<DataTable
 					headers={['Nome', 'Foto']}
 					data={this.props.members} />
-				
-				<AddMember 
+
+				<AddMember
+          handleCreate={this.handleCreate.bind(this)}
 					hasFeature={this.props.members && this.props.members.length < 1}
 					open={this.state.modalOpen} />
 			</div>
