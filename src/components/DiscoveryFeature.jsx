@@ -7,14 +7,16 @@ class DiscoveryFeature extends Component {
 	state = {
 		coords: null,
 		open: false,
-		closed: false
-	}
+		closed: false,
+    size: 1100
+  };
 
 
-	static defaultProps = {
-		color: '#8BC34A',
-		size: 1100
-	}
+  static defaultProps = {
+    color: '#8BC34A'
+	};
+
+
 
 
 	static propTypes = {
@@ -36,7 +38,24 @@ class DiscoveryFeature extends Component {
 
 		this.setState({
 			coords: childrenNode.getBoundingClientRect()
-		})
+		});
+
+
+    var size,
+      factor = 1.2;
+
+    if(window.innerWidth < 480) factor = 1.65;
+
+    if(window.innerWidth > window.innerHeight)
+      size = window.innerHeight * factor;
+    else
+      size = window.innerWidth* factor;
+
+
+    this.setState({
+      size: size
+    });
+
 	}
 
 
@@ -49,11 +68,11 @@ class DiscoveryFeature extends Component {
 
 	/**
 	 * Render the feature description
-	 * 
+	 *
 	 */
 	renderText() {
 
-		if(!this.props.text) 
+		if(!this.props.text)
 			return;
 
 		const defaultTextStyle = {
@@ -62,10 +81,18 @@ class DiscoveryFeature extends Component {
 			position: 'relative',
 			left: '15%',
 			top: '25%',
-		}
+		};
+
+    if (window.innerWidth < 480) {
+      var responsizeText = {
+        maxWidth: 260,
+        left: '10%',
+        fontSize: 20
+      };
+    }
 
 
-		var textStyle = Object.assign(defaultTextStyle, this.props.textStyle);
+		var textStyle = Object.assign(defaultTextStyle, this.props.textStyle, responsizeText);
 
 		if(typeof this.props.text == 'string')
 			return (<h3 style={textStyle}>{this.props.text}</h3>);
@@ -84,8 +111,8 @@ class DiscoveryFeature extends Component {
 
 		const defaultCircleStyle = {
 			background: this.props.color,
-			width: this.props.size,
-			height: this.props.size,
+			width: this.props.size || this.state.size,
+			height: this.props.size || this.state.size,
 			position: 'fixed',
 			transform: 'scale(0)',
 		}
@@ -99,7 +126,7 @@ class DiscoveryFeature extends Component {
 
 		if(coords) {
 			let innerWidth = coords.width / 2;
-			
+
 			var defaultInnerCircleStyle = {
 				width: coords.width*2,
 				height: coords.height*2,
@@ -108,7 +135,7 @@ class DiscoveryFeature extends Component {
 				transform: 'scale(0)',
 				transition: 'all 1100ms cubic-bezier(0.23, 1, 0.32, 1) 350ms'
 			}
-			
+
 			positionCircle = {
 				left: coords.left-defaultCircleStyle.width/2,
 				top: coords.top-defaultCircleStyle.height/2,
@@ -145,7 +172,7 @@ class DiscoveryFeature extends Component {
 
 		return (
 			<div>
-				<Paper 
+				<Paper
 					onTransitionEnd={() => this.circleTransition.transition = 'all 650ms cubic-bezier(0.79,-0.17, 0.82, 0.1)'}
 					style={circleStyle}
 					circle={true}>
