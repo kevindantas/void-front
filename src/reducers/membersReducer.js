@@ -26,7 +26,25 @@ export default function membersReduce (state = {
 				...state,
 				member: {...state.member}
 			}
+		case 'VIEW_MEMBER':
+			state.member = action.payload;
+			return {
+				...state,
+				member: {...state.member}
+			}
 
+		case 'EDIT_MEMBER':
+			state.data = state.data.map(record => {
+				console.log(record.id)
+				if(record.id === action.payload.id)
+					return action.payload;
+				return record
+			})
+
+			return {
+				...state,
+				data: state.data
+			}
 		case 'DELETE_MEMBER':
 			state.data = state.data.filter(record => record.id !== action.payload)
 			return {

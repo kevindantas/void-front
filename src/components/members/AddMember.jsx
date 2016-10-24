@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField'
 import FAB from 'material-ui/FloatingActionButton'
 import AddIcon from 'material-ui/svg-icons/content/add';
 
-import DiscoveryFeature from '../components/DiscoveryFeature'
+import DiscoveryFeature from '../DiscoveryFeature'
 
 
 class AddMember extends Component {

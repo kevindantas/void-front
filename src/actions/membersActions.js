@@ -38,6 +38,31 @@ export const createMember = data => dispatch => (
 )
 
 
+
+export const viewMember = id => dispatch => (
+  axios.get(`${Endpoints.API_URL}/team/${id}`, config)
+    .then(response => dispatch({
+      type: 'VIEW_MEMBER',
+      payload: response.data
+    }))
+    .catch(e => dispatch({
+      type: 'VIEW_MEMBER_FAILED',
+      payload: e
+    }))
+)
+
+export const editMember = data => dispatch => (
+  axios.put(`${Endpoints.API_URL}/team/${data.id}`, data, config)
+    .then(response => dispatch({
+      type: 'EDIT_MEMBER',
+      payload: response.data
+    }))
+    .catch(e => dispatch({
+      type: 'EDIT_MEMBER_FAILED',
+      payload: e
+    }))
+)
+
 export const deleteMember = id => dispatch => (
   axios.delete(`${Endpoints.API_URL}/team/${id}`, config)
     .then(response => dispatch({
