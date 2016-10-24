@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 //import '../../css/LayoutAdmin.css';
@@ -6,6 +6,27 @@ import AppNavBar from './AppNavBar';
 
 
 class LayoutAdmin extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+
+  componentWillMount() {
+    var token = localStorage.getItem('void-token');
+    var user  = localStorage.getItem('void-user');
+
+    if (token)
+      token = JSON.stringify(token);
+
+    if (user)
+      token = JSON.stringify(user);
+
+    if(!token && !user)
+      this.context.router.push('/auth')
+  }
+
+
+
   render() {
     const wrapperStyle = {
       maxWidth: '90vw',

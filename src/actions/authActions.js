@@ -15,6 +15,10 @@ export const login = form => dispatch => {
 				Authorization: `Basic ${btoa(form.email + ':' + form.password)}`,
 			},
 		})
-		.then(response => dispatch({type: 'FETCH_AUTH_DONE', payload: response.data}))
+		.then(response => {
+      localStorage.setItem('void-token', JSON.stringify({token: response.token}));
+      localStorage.setItem('void-user', JSON.stringify({user: response.user}));
+      dispatch({type: 'FETCH_AUTH_DONE', payload: response.data})
+		})
 		.catch(e => dispatch({type: 'FETCH_AUTH_ERROR', payload: e.response}))
 };
