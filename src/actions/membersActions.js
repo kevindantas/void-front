@@ -38,3 +38,16 @@ export const createMember = data => dispatch => (
 )
 
 
+export const deleteMember = id => dispatch => (
+  axios.delete(`${Endpoints.API_URL}/team/${id}`, config)
+    .then(response => dispatch({
+      type: 'DELETE_MEMBER',
+      payload: id
+    }))
+    .catch(e => dispatch({
+      type: 'DELETE_MEMBER_FAILED',
+      payload: e
+    }))
+)
+
+

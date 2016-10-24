@@ -62,6 +62,10 @@ class AddMember extends Component {
       picture: this.state.image
     };
 
+    this.setState({
+      modalOpen: false
+    });
+
     this.props.handleCreate(formData);
 	};
 
@@ -154,14 +158,13 @@ class AddMember extends Component {
 							label="Escolha a imagem"
 							labelPosition="before"
 							containerElement="label">
-							<input name="fotoFile" type="file" style={imageInputStyle} onChange={this.handleChange} />
-						</RaisedButton>
+							<input name="fotoFile" type="file" style={imageInputStyle} onChange={this.handleChange} accept="image/*"/>
+            </RaisedButton>
 
 						<img
 							style={imgStyle}
 							alt="Preview image"
 							src={this.state.image}
-              accept="image/*"
 							onError={this.handleError} />
 					</form>
 				</Dialog>
