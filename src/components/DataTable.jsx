@@ -32,7 +32,10 @@ class DataTable extends Component {
 
 	static defaultProps = {
 		hasActions: true
-	}
+	};
+
+
+
 
 
 	/**
@@ -106,8 +109,6 @@ class DataTable extends Component {
 	 * @return {Array}
 	 */
 	renderBody() {
-
-
     if(!this.props.data) {
       return (<TableRow>
         <TableRowColumn style={{textAlign: 'center'}}><LinearProgress mode="indeterminate" />Carregando </TableRowColumn>
@@ -125,18 +126,18 @@ class DataTable extends Component {
 			overflow: 'visible'
 		}
 
-		return this.props.data.map((team, i) => {
+		return this.props.data.map((record, i) => {
       return <TableRow key={i} hoverable={true}>
 
 
-        { this.renderColumns(team) }
+        { this.renderColumns(record) }
 
 
         <TableRowColumn style={tdStyle}>
           <RecordActions
-            viewAction={`/admin/equipe/${team.id}`}
-            editAction={`/admin/equipe/${team.id}`}
-            deleteAction={`/admin/equipe/${team.id}`}/>
+          	id={record.id}
+            editAction={this.props.editAction}
+            deleteAction={this.props.deleteAction} />
         </TableRowColumn>
       </TableRow>
     });

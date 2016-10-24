@@ -11,9 +11,9 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete-forever'
  * @property {string|function} viewAction - Actions for the viewButton
  * @property {string|function} editAction - Actions for the editButton
  * @property {string|function} deleteAction - Actions for the deleteButton
- * 
+ *
  * @param  {object} props Properties from the component
- * @return {DOM}       
+ * @return {DOM}
  */
 const RecordActions = (props) => {
 
@@ -23,9 +23,9 @@ const RecordActions = (props) => {
 
 	if(props.viewAction) {
 		viewButton = (
-			<IconButton 
+			<IconButton
 				touch={true}
-				tooltip="Detalhes" 
+				tooltip="Detalhes"
 				tooltipPosition="top-center">
 				<ViewIcon color="#666" />
 			</IconButton>
@@ -33,10 +33,11 @@ const RecordActions = (props) => {
 	}
 
 	if(props.editAction) {
-		editButton = (
-			<IconButton 
+    editButton = (
+			<IconButton
+        		onClick={props.editAction.bind(this, props.id)}
 				touch={true}
-				tooltip="Editar" 
+				tooltip="Editar"
 				tooltipPosition="top-center">
 				<EditIcon color="#666" />
 			</IconButton>
@@ -46,9 +47,10 @@ const RecordActions = (props) => {
 
 	if(props.deleteAction) {
 		deleteButton = (
-			<IconButton 
+			<IconButton
+        		onClick={props.deleteAction.bind(this, props.id)}
 				touch={true}
-				tooltip="Deletar" 
+				tooltip="Deletar"
 				tooltipPosition="top-center">
 				<DeleteIcon color="#666" />
 			</IconButton>
