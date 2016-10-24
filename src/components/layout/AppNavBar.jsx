@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
@@ -19,20 +19,30 @@ class AppNavBar extends Component {
 	};
 
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+
+  logout() {
+    localStorage.clear();
+    this.context.router.replace('/');
+  }
+
+
 	navigation = [
     {
-      label: 'Galeria',
-      href: '/galeria',
+      label: 'Game',
+      href: '/game',
       onlyLogged: false
+    },
+    {
+      label: 'Galeria',
+      href: '/admin/galeria',
+      onlyLogged: true
     },
     {
       label: 'Equipe',
-      href: '/equipe',
-      onlyLogged: false
-    },
-    {
-      label: 'Usuários',
-      href: '/admin/usuarios',
+      href: '/admin/equipe',
       onlyLogged: true
     },
     {
@@ -43,8 +53,9 @@ class AppNavBar extends Component {
     },
     {
       label: 'Logout',
-      href: '/auth',
-      onlyLogged: true
+      href: '#',
+      onlyLogged: true,
+      onClick: this.logout
     }
   ];
 
@@ -59,6 +70,7 @@ class AppNavBar extends Component {
               key={item.label}
               style={this.navBarItemsStyle}
               label={item.label}
+              onClick={item.onClick ? item.onClick.bind(this) : null}
               href={item.href} />
           }
         )
@@ -74,7 +86,7 @@ class AppNavBar extends Component {
           if(item.onlyLogged && !this.props.token || item.onlyAnom && this.props.token)
             return;
 
-            return <MenuItem key={item.label} onTouchTap={this.handleClose} href={item.href}>{item.label}</MenuItem>
+            return <MenuItem key={item.label} onTouchTap={this.handleClose} href={item.href} onClick={item.onClick ? item.onClick.bind(this) : null}>{item.label}</MenuItem>
           }
         )
       }
@@ -103,6 +115,7 @@ class AppNavBar extends Component {
           titleStyle={titleStyle}
           showMenuIconButton={this.state.mobile}
           onLeftIconButtonTouchTap={() => this.setState({open: true})}
+          onTitleTouchTap={() => this.context.router.push('/')}
           iconElementRight={this.state.mobile ? null :  this.navBarItems} />
 
         <Drawer

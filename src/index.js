@@ -13,6 +13,7 @@ import './index.css';
 import Auth from './containers/Auth';
 import Home from './components/Home';
 import Team from './components/Team';
+import Game from './components/Game';
 import Gallery from './components/Gallery';
 import NotFound from './components/NotFound';
 
@@ -38,7 +39,8 @@ render(
   	<Router history={history}>
     	<Route path="/" component={Layout}>
         <IndexRoute component={Home} />
-    		<Route path="galeria" component={Gallery} />
+        <Route path="galeria" component={Gallery} />
+    		<Route path="game" component={Game} />
     		<Route path="equipe" component={Team} />
     	</Route>
 
