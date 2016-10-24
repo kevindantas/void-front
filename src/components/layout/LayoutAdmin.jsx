@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { connect } from 'react-redux';
 
 //import '../../css/LayoutAdmin.css';
-import NavBarAdmin from './NavBarAdmin';
+import AppNavBar from './AppNavBar';
 
 
 class LayoutAdmin extends Component {
@@ -15,7 +14,7 @@ class LayoutAdmin extends Component {
     return (
       <MuiThemeProvider>
         <div className="LayoutAdmin">
-          <NavBarAdmin />
+          <AppNavBar />
 
           <main style={wrapperStyle}>
             { this.props.children }

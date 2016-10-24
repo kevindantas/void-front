@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { connect } from 'react-redux';
 
 import '../../css/App.css';
 import AppNavBar from './AppNavBar';

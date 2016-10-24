@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -22,31 +23,40 @@ class AppNavBar extends Component {
     {
       label: 'Galeria',
       href: '/galeria',
-      logged: false
+      onlyLogged: false
     },
     {
       label: 'Equipe',
       href: '/equipe',
-      logged: false
+      onlyLogged: false
     },
     {
       label: 'Login',
       href: '/auth',
-      logged: false
+      onlyLogged: false
+    },
+    {
+      label: 'Logout',
+      href: '/auth',
+      onlyLogged: true
     }
   ];
 
 	navBarItems = (
 		<nav>
       {
-        this.navigation.map(item =>
-          (
-          <FlatButton
-            key={item.label}
-            style={this.navBarItemsStyle}
-            label={item.label}
-            href={item.href} />)
-          )
+        this.navigation.map(item =>{
+          console.log(this.props);
+            if(item.onlyLogged && !this.props.token)
+              return;
+
+            return <FlatButton
+              key={item.label}
+              style={this.navBarItemsStyle}
+              label={item.label}
+              href={item.href} />
+          }
+        )
       }
     </nav>
 	);
@@ -103,4 +113,10 @@ class AppNavBar extends Component {
 	}
 }
 
-export default AppNavBar;
+function mapStateToProps (state) {
+  return {
+    token: state.auth.token,
+    user: state.auth.user
+  }
+}
+export default connect(mapStateToProps)(AppNavBar);
