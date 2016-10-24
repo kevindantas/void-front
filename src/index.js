@@ -11,7 +11,7 @@ import LayoutAdmin from './components/layout/LayoutAdmin';
 import './index.css';
 
 import Auth from './containers/Auth';
-import Home from './components/Home';
+import Home from './containers/Home';
 import Team from './components/Team';
 import Game from './components/Game';
 import Gallery from './components/Gallery';
