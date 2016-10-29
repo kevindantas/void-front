@@ -7,7 +7,8 @@ class Game extends Component {
 		const iframeStyle = {
 			width: '100%',
 			height: 'calc(100vh - 70px)',
-			border: 'none'
+			border: 'none',
+			margin: 'auto'
 
 		}
 		return (

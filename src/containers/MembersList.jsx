@@ -59,7 +59,7 @@ class MembersList extends Component {
 
 				<AddMember
           			handleCreate={this.handleCreate.bind(this)}
-					hasFeature={this.props.loading && this.props.members.length < 1} />
+					hasFeature={true} />
 
 				<EditMember
 					handleClose={() => this.setState({modalOpen: false})}

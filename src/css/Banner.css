@@ -69,7 +69,7 @@
 
 
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 479px) {
   .BannerWrapper {
     flex-direction: column;
   }

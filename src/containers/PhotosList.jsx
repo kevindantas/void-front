@@ -59,7 +59,7 @@ class PhotosList extends Component {
 
 				<AddPhoto
           			handleCreate={this.handleCreate.bind(this)}
-					hasFeature={this.props.loading && this.props.photos.length < 1} />
+					hasFeature={true} />
 
 				<EditPhoto
 					handleClose={() => this.setState({modalOpen: false})}

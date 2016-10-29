@@ -22,7 +22,7 @@ class GallerySection extends Component {
 	          	cols={3}
 	          	rows={1}
 				title={photo.title}
-				key={photo.picture} >
+				key={photo.id} >
 	          <img src={photo.picture} />
 			</GridTile>
 			))

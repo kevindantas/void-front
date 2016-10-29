@@ -8,12 +8,12 @@ class DiscoveryFeature extends Component {
 		coords: null,
 		open: false,
 		closed: false,
-    size: 1100
-  };
+	    size: 1100
+	};
 
 
-  static defaultProps = {
-    color: '#8BC34A'
+	static defaultProps = {
+		color: '#8BC34A'
 	};
 
 
